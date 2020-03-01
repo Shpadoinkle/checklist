@@ -1,12 +1,15 @@
 import React from "react";
 import { View } from "react-native";
+import { PADDING_HORIZONTAL } from "../constants/Values";
 
 export default ({
   children,
   pv = 16,
-  ph = 24,
+  ph = PADDING_HORIZONTAL,
   bg = "#fff",
   mt = 0,
+  btw = 0,
+  bbw = 0,
   containerStyle = {}
 }) => {
   return (
@@ -18,6 +21,8 @@ export default ({
           backgroundColor: bg,
           paddingVertical: pv,
           paddingHorizontal: ph,
+          borderTopWidth: btw,
+          borderBottomWidth: bbw,
           ...containerStyle
         }
       ]}
@@ -31,6 +36,7 @@ const styles = {
   sectionWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    borderColor: "#ddd"
   }
 };

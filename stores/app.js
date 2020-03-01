@@ -45,8 +45,45 @@ class AppStore {
   }
 
   @action
+  addListItem(listId, value) {
+    this.lists = this.lists.map(list => {
+      if (list.id === listId) {
+        list.items = [...list.items, value];
+
+        return list;
+      }
+      return list;
+    });
+  }
+
+  @action
+  toggleItem(listId, itemId) {
+    this.lists = this.lists.map(list => {
+      if (list.id === listId) {
+        list.items = list.items.map(item => {
+          if (item.id === itemId) {
+            item.marked = !item.marked;
+
+            return item;
+          }
+          return item;
+        });
+        return list;
+      }
+      return list;
+    });
+  }
+
+  @action
   addList(value) {
     this.lists = [...this.lists, value];
+  }
+
+  @action
+  removeList(listId) {
+    this.lists = this.lists.filter(e => {
+      return e.id !== listId;
+    });
   }
 
   @action

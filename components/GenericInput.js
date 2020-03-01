@@ -33,14 +33,18 @@ export default class GenericInput extends Component {
   };
 
   onSubmitEditing = () => {
-    if (this.props.onSubmitEditing) {
-      this.props.onSubmitEditing();
+    const { onSubmitEditing } = this.props;
+    if (onSubmitEditing) {
+      // this.handleBlur();
+      onSubmitEditing();
     }
   };
 
   render() {
     const { focused, dirty } = this.state;
     const {
+      blurOnSubmit = true,
+      autoFocus = false,
       label = "",
       value = "",
       placeholder = "",
@@ -50,6 +54,7 @@ export default class GenericInput extends Component {
       onPress,
       icon,
       secureTextEntry = false,
+      autoCapitalize = "none",
       ...rest
     } = this.props;
 
@@ -67,8 +72,9 @@ export default class GenericInput extends Component {
           <TouchableOpacity onPress={onPress}>
             <View pointerEvents="none">
               <TextInput
+                autoFocus={autoFocus}
                 autoCorrect={false}
-                autoCapitalize="none"
+                autoCapitalize={autoCapitalize}
                 value={value}
                 placeholder={placeholder}
                 placeholderTextColor={"#888"}
@@ -78,6 +84,7 @@ export default class GenericInput extends Component {
                 onFocus={this.handleFocus}
                 onSubmitEditing={this.onSubmitEditing}
                 secureTextEntry={secureTextEntry}
+                blurOnSubmit={blurOnSubmit}
                 {...rest}
               />
             </View>
@@ -91,6 +98,7 @@ export default class GenericInput extends Component {
       <View style={[styles.inputWrapper, containerStyle]}>
         {!!label && <Text style={styles.label}>{label}</Text>}
         <TextInput
+          autoFocus={autoFocus}
           autoCorrect={false}
           autoCapitalize="none"
           value={value}
