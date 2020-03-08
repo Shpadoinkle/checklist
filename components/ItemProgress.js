@@ -36,7 +36,7 @@ export default ({ length = 0, marked = 0 }) => {
       <View
         style={{
           height: "100%",
-          width: 150 / marked,
+          width: (marked / length) * 150,
           backgroundColor: Colors.BRANDING_PRIMARY
         }}
       />
