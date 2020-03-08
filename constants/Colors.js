@@ -3,10 +3,11 @@ export default {
   GREY: "#747889",
   MID_GREY: "#d5d6db",
   BORDER_COLOR: "#ebebeb",
-  BACKGROUND_COLOR: "#f3f3f5",
+  BACKGROUND_COLOR: "#fff",
+  APP_BACKGROUND_COLOR: "#f3f3f5",
   WHITE: "#fff",
 
-  BRANDING_PRIMARY: "#3b55b4",
+  BRANDING_PRIMARY: "#FF6157",
   BRANDING_ACCENT: "#f2f4fa",
   BRANDING_SECONDARY: "#ffd86a",
   BRANDING_TERTIARY: "#d5e2c0",

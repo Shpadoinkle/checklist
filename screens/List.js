@@ -1,10 +1,12 @@
 import { observer } from "mobx-react";
 import React, { Component } from "react";
-import { Text, TouchableOpacity, View, Switch } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Alert, ScrollView, Switch, Text, View } from "react-native";
 import Header from "../components/Header";
 import Padder from "../components/Padder";
+import PlusButton from "../components/PlusButton";
+import ScreenWrapper from "../components/ScreenWrapper";
 import Section from "../components/Section";
+import Colors from "../constants/Colors";
 import NewListItem from "../forms/NewListItem";
 import appStore from "../stores/app";
 
@@ -12,60 +14,82 @@ import appStore from "../stores/app";
 class List extends Component {
   constructor(props) {
     super(props);
-    this.state = { newVisible: false };
+    this.state = {
+      newItemVisible: false,
+
+      options: [
+        {
+          label: "Delete List",
+          action: () => {
+            Alert.alert("yes");
+          }
+        }
+      ]
+    };
   }
 
   render() {
     const listParam = this.props.navigation.getParam("list", {});
     const list = appStore.lists.find(e => e.id === listParam.id);
-    const { newVisible } = this.state;
+    const { newItemVisible } = this.state;
     const { items } = list;
 
     return (
-      <View>
+      <ScreenWrapper>
         <Header
           title={list.name}
           leftIcon="chevron-left"
+          leftIconColor={Colors.BRANDING_PRIMARY}
           onLeftPress={() => {
             this.props.navigation.pop();
           }}
-          rightIcon="plus"
-          rightIconColor="red"
-          onRightPress={() => {
-            this.setState({ newVisible: true });
-          }}
+          // rightComponent={<Dropdown />}
+          // rightIcon="plus"
+          // rightIconColor="red"
+          // onRightPress={() => {
+          //   this.setState({ newItemVisible: true });
+          // }}
         />
-        <Padder h={12} />
-        {items &&
-          items.map((e, i) => (
-            <View key={e.id}>
-              {/* <TouchableOpacity
+        <ScrollView>
+          <Padder h={12} />
+          {items &&
+            items.map((e, i) => (
+              <View key={e.id}>
+                {/* <TouchableOpacity
               onPress={() => {
                 this.props.navigation.navigate("List", { list: e });
               }}
             > */}
-              <Section btw={i === 0 ? 1 : 0} bbw={1}>
-                <Text>{e.name}</Text>
+                <Section btw={i === 0 ? 1 : 0} bbw={1}>
+                  <Text>{e.name}</Text>
 
-                <Switch
-                  value={e.marked}
-                  onChange={() => {
-                    appStore.toggleItem(list.id, e.id);
-                  }}
-                />
-              </Section>
-              {/* </TouchableOpacity> */}
-            </View>
-          ))}
-
-        <NewListItem
-          visible={newVisible}
-          listId={list.id}
-          onRequestClose={() => {
-            this.setState({ newVisible: false });
+                  <Switch
+                    value={e.marked}
+                    onChange={() => {
+                      appStore.toggleItem(list.id, e.id);
+                    }}
+                    trackColor={{
+                      true: Colors.BRANDING_PRIMARY
+                    }}
+                  />
+                </Section>
+                {/* </TouchableOpacity> */}
+              </View>
+            ))}
+        </ScrollView>
+        <PlusButton
+          onPress={() => {
+            this.setState({ newItemVisible: true });
           }}
         />
-      </View>
+        <NewListItem
+          visible={newItemVisible}
+          listId={list.id}
+          onRequestClose={() => {
+            this.setState({ newItemVisible: false });
+          }}
+        />
+      </ScreenWrapper>
     );
   }
 }

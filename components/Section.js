@@ -1,12 +1,13 @@
 import React from "react";
 import { View } from "react-native";
+import Colors from "../constants/Colors";
 import { PADDING_HORIZONTAL } from "../constants/Values";
 
 export default ({
   children,
   pv = 16,
   ph = PADDING_HORIZONTAL,
-  bg = "#fff",
+  bg = Colors.BACKGROUND_COLOR,
   mt = 0,
   btw = 0,
   bbw = 0,

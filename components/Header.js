@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { PADDING_HORIZONTAL } from "../constants/Values";
+import Colors from "../constants/Colors";
 
 export default ({
   title = "",
@@ -14,8 +15,12 @@ export default ({
   rightIconColor = "#000",
   onRightPress = null,
 
-  backgroundColor = "#fff",
+  backgroundColor = Colors.BACKGROUND_COLOR,
   children = null,
+
+  leftComponent = null,
+  rightComponent = null,
+
   style = {}
 }) => {
   return (
@@ -56,11 +61,18 @@ export default ({
             {title}
           </Text>
 
-          <TouchableOpacity style={styles.headerButtons} onPress={onRightPress}>
-            {onRightPress && (
-              <Icon name={rightIcon} size={14} color={rightIconColor} />
-            )}
-          </TouchableOpacity>
+          {!!rightComponent ? (
+            rightComponent
+          ) : (
+            <TouchableOpacity
+              style={styles.headerButtons}
+              onPress={onRightPress}
+            >
+              {onRightPress && (
+                <Icon name={rightIcon} size={14} color={rightIconColor} />
+              )}
+            </TouchableOpacity>
+          )}
         </View>
       )}
     </View>

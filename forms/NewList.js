@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { TextInput, View, TouchableOpacity, Text, Modal } from "react-native";
-import GenericInput from "../components/GenericInput";
-import Button from "../components/Button";
-import Padder from "../components/Padder";
+import { Modal, TouchableOpacity, View } from "react-native";
 import uuid from "uuid";
+import Button from "../components/Button";
+import GenericInput from "../components/GenericInput";
+import Padder from "../components/Padder";
+import Colors from "../constants/Colors";
 import appStore from "../stores/app";
 
 class NewList extends Component {
@@ -44,7 +45,7 @@ class NewList extends Component {
             style={{
               width: "100%",
               padding: 20,
-              backgroundColor: "#fff",
+              backgroundColor: Colors.BACKGROUND_COLOR,
               borderRadius: 10
             }}
           >
